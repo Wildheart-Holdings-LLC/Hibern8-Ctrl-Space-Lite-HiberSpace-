@@ -1,0 +1,76 @@
+:root{--bg:#0d1117;--card:#161b22;--line:#2a3340;--txt:#e6edf3;--muted:#8b97a7;--accent:#4f8cff;--warn:#ffcf4d;--outline:#06090f}
+@media (prefers-color-scheme: light){:root{--bg:#f3f5f9;--card:#fff;--line:#dde3ec;--txt:#10131a;--muted:#566;--accent:#2e5bba;--outline:#fbfdff}}
+/* Manual theme override (Auto = no class -> media query decides). Set on body so it beats :root. */
+body.dark{--bg:#0d1117;--card:#161b22;--line:#2a3340;--txt:#e6edf3;--muted:#8b97a7;--accent:#4f8cff;--warn:#ffcf4d;--outline:#06090f}
+body.light{--bg:#f3f5f9;--card:#fff;--line:#dde3ec;--txt:#10131a;--muted:#566;--accent:#2e5bba;--outline:#fbfdff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:13px -apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+header{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 14px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:10}
+.counts{color:var(--muted);font-size:12px}
+.sel{background:var(--card);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:5px 8px;font-size:12px;font-weight:600;cursor:pointer}
+.sel:hover{border-color:var(--accent)}
+.kbd{margin-left:8px;font-size:10.5px;font-weight:700;letter-spacing:.3px;color:var(--accent);border:1px solid var(--line);border-radius:6px;padding:2px 6px}
+.sp{flex:1}
+.btn{background:var(--card);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:7px 11px;font-size:12.5px;font-weight:600;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.ghost{background:none}
+.ctrls{display:flex;align-items:center;gap:8px;padding:8px 14px 0}
+.ctrls .clabel{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+.hue{-webkit-appearance:none;appearance:none;width:130px;height:14px;border-radius:8px;cursor:pointer;border:1px solid var(--line);background:linear-gradient(90deg,#ff0000,#ff8a00,#ffe600,#21d07a,#00b3ff,#3b46ff,#b14bff,#ff0000)}
+.hue::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:#fff;border:2px solid #222;cursor:pointer}
+.hue::-moz-range-thumb{width:15px;height:15px;border-radius:50%;background:#fff;border:2px solid #222;cursor:pointer}
+.sat{-webkit-appearance:none;appearance:none;width:80px;height:14px;border-radius:8px;cursor:pointer;border:1px solid var(--line);background:linear-gradient(90deg,#8a8a8a,#39a0ff)}
+.sat::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:#fff;border:2px solid #222;cursor:pointer}
+.sat::-moz-range-thumb{width:15px;height:15px;border-radius:50%;background:#fff;border:2px solid #222;cursor:pointer}
+.ctrls #hueReset{padding:4px 9px;font-size:12px}
+.metrics{display:flex;gap:6px;padding:8px 14px 2px;flex-wrap:wrap}
+.metric{flex:1 1 0;min-width:80px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:5px 8px;text-align:center}
+.mv{display:block;font-size:16px;font-weight:700;color:var(--accent);line-height:1.1}
+.ml{display:block;font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-top:1px}
+main{padding:6px 14px 10px}
+h3{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:9px 0 3px}
+.winhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0 3px;padding-bottom:3px;border-bottom:1px solid var(--line)}
+.winttl{font-size:11.5px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);font-weight:700}
+.winhib{padding:3px 8px;font-size:11.5px;flex:0 0 auto}
+.winhib:disabled{opacity:.45;cursor:default}
+.row{display:flex;align-items:center;gap:8px;padding:4px 8px;border:1px solid var(--line);border-radius:7px;margin:3px 0;background:var(--card)}
+.row.audio{border-left:3px solid var(--warn)}
+.row.active{border-left:3px solid var(--accent);background:color-mix(in srgb, var(--accent) 10%, var(--card))}
+.row.dorm{opacity:.8;border-style:dashed}
+.t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.win{flex:0 0 auto;font-size:9.5px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+.h{color:var(--muted);font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+.b{display:flex;gap:5px;flex:0 0 auto}
+.b button{background:none;border:1px solid var(--line);color:var(--txt);border-radius:6px;padding:3px 7px;font-size:11.5px;cursor:pointer;line-height:1.2}
+.b button:hover{border-color:var(--accent)}
+.b .closebtn{color:#e5534b;font-weight:700}
+.b .closebtn:hover{border-color:#e5534b;background:rgba(229,83,75,.12)}
+.empty{color:var(--muted);font-size:13px;padding:24px 0;text-align:center}
+footer{padding:9px 14px;color:var(--muted);font-size:11px;border-top:1px solid var(--line)}
+/* outline the power number in the inverse-of-text color for definition */
+.mv.outlined{-webkit-text-stroke:.5px var(--outline);paint-order:stroke fill;text-shadow:0 0 2px var(--outline)}
+/* help overlay */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:flex-start;justify-content:center;padding:24px;overflow:auto;z-index:20}
+/* the [hidden] attribute must beat the display:flex above, or the panel/banner can never hide */
+.overlay[hidden],.holdbar[hidden]{display:none}
+.hcard{background:var(--card);border:1px solid var(--line);border-radius:13px;max-width:560px;width:100%;padding:20px 22px;position:relative;line-height:1.5}
+.hcard h2{margin:.1em 0;font-size:18px}
+.hcard h3{margin:1em 0 .25em;font-size:13px;color:var(--accent)}
+.hcard p,.hcard li{font-size:12.5px;color:var(--txt)}
+.hcard ul{margin:.2em 0;padding-left:18px}
+.hcard li{margin:5px 0}
+.hcard .priv{background:color-mix(in srgb,#2e9d5f 16%,var(--card));border:1px solid #2e7d4f;border-left:3px solid #35c47a;border-radius:8px;padding:9px 11px}
+.hclose{position:absolute;top:10px;right:12px;background:none;border:none;color:var(--muted);font-size:17px;cursor:pointer}
+.hcard .btn.primary{margin-top:14px}
+.hcard .chk{display:flex;align-items:center;gap:8px;font-size:12.5px;margin:6px 0;cursor:pointer}
+.hcard .fine{font-size:11px;color:var(--muted)}
+/* Safe-Hold banner */
+.holdbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 14px;padding:9px 12px;background:#2a1414;border:1px solid #6e3232;border-left:3px solid #e5534b;border-radius:9px;font-size:12.5px;color:#f6d6d1}
+@media (prefers-color-scheme: light){.holdbar{background:#fdeceb;border-color:#eec4c0;color:#8a2a22}}
+/* keep the banner consistent when the theme is forced (overrides the media query) */
+body.dark .holdbar{background:#2a1414;border-color:#6e3232;color:#f6d6d1}
+body.light .holdbar{background:#fdeceb;border-color:#eec4c0;color:#8a2a22}
+.holdbar .hb{display:flex;gap:8px;flex:0 0 auto}
+.holdbar .hb .btn{padding:5px 10px;font-size:12px}
+.holdbar .hb .btn.primary{background:#e5534b;border-color:#e5534b;color:#fff}

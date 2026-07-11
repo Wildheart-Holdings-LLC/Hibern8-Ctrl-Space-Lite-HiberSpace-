@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hibern8 Ctrl+Space Lite (HiberSpace)</title>
+<link rel="stylesheet" href="lite.css">
+</head>
+<body>
+  <header>
+    <b>💤 Hibern8 Ctrl+Space Lite</b><span class="nick" title="&quot;HiberSpace&quot; — shorthand for Hibern8 Ctrl+Space Lite, a play on &quot;hyperspace&quot;">HiberSpace</span>
+    <span id="counts" class="counts"></span>
+    <span class="sp"></span>
+    <button id="hibAll" class="btn primary" title="Hibernate idle tabs (skips active, pinned, and audio/video) across all windows">💤 Hibernate idle tabs</button>
+    <button id="muteAll" class="btn" title="Mute every tab playing sound">🔇 Mute all</button>
+    <button id="suspendBtn" class="btn" title="Suspend session: hold all page traffic until you release (public-network / pre-VPN protection)">🛡 Suspend</button>
+    <button id="helpBtn" class="btn ghost" title="Help &amp; about">❔</button>
+    <button id="refresh" class="btn ghost" title="Refresh">↻</button>
+  </header>
+
+  <div class="holdbar" id="holdNote" hidden>
+    <span id="holdMsg">🔒 <b>Traffic held.</b></span>
+    <span class="hb" id="holdBtns"></span>
+  </div>
+
+  <div class="ctrls">
+    <span class="clabel">Theme</span>
+    <select id="themeSel" class="sel" title="Light, dark, or match your system">
+      <option value="auto">Auto</option>
+      <option value="dark">Dark</option>
+      <option value="light">Light</option>
+    </select>
+    <span class="clabel">Color</span>
+    <input type="range" id="hueSlider" class="hue" min="0" max="360" step="1" title="Tint accents &amp; the toolbar icon across the ROYGBIV spectrum">
+    <input type="range" id="satSlider" class="sat" min="0" max="100" step="1" value="90" title="Saturation — slide to 0 for greyscale">
+    <button id="hueReset" class="btn ghost" title="Reset to default color">↺</button>
+  </div>
+
+  <div class="metrics" id="metrics">
+    <div class="metric"><span class="mv" id="mHib">0</span><span class="ml">hibernated</span></div>
+    <div class="metric"><span class="mv" id="mAwake">0</span><span class="ml">awake</span></div>
+    <div class="metric"><span class="mv" id="mMb">0</span><span class="ml">≈ MB reclaimed</span></div>
+    <div class="metric"><span class="mv outlined" id="mW">0</span><span class="ml">≈ W saved</span></div>
+  </div>
+
+  <main id="list"></main>
+
+  <div class="overlay" id="helpOverlay" hidden>
+    <div class="hcard" role="dialog" aria-modal="true" aria-label="Hibern8 Ctrl+Space Lite help">
+      <button class="hclose" id="helpClose" title="Close">✕</button>
+      <h2>💤 Hibern8 Ctrl+Space Lite — Help</h2>
+      <p class="fine">Also known as <b>“HiberSpace”</b> — a play on “hyperspace” and shorthand for Hibern8 Ctrl+Space Lite.</p>
+      <p class="priv"><b>🔒 No information leaves your device through Hibern8 Ctrl+Space Lite.</b> It has no servers and sends nothing about you, your tabs, or your browsing anywhere. Everything runs locally in your browser profile; the only things it saves on your device are your display preferences (theme and accent color) and the two Safe-Hold toggles.</p>
+      <h3>What it does</h3>
+      <ul>
+        <li><b>Hibernate tabs &amp; windows</b> — per-tab 💤; "Hibernate idle tabs" sweeps every window; "💤 Window" on an active tab frees just that window. Active, pinned, and audio/video tabs are always spared.</li>
+        <li><b>See audio/video tabs</b> — anything playing sound is listed at the top, with Go and Mute.</li>
+        <li><b>See active tabs</b> — the foreground tab of each window, with Go and a one-click window hibernate.</li>
+        <li><b>Memory &amp; power estimates</b> — the metrics row shows hibernated/awake counts and the approximate MB reclaimed and watts saved.</li>
+      </ul>
+      <h3>Prove the savings</h3>
+      <p>Open your browser's task manager — <b>Shift+Esc</b> in Chrome/Edge, or <b>about:performance</b> in Firefox — and watch hibernated tabs' memory collapse. The in-app numbers are illustrative estimates; the task manager shows the truth.</p>
+      <h3>Safe-Hold (public-network privacy)</h3>
+      <p><b>🛡 Suspend</b> holds all page traffic, <b>pauses any in-progress downloads</b> (resuming on release), and keeps tabs from loading until you release it — so nothing reloads or keeps transferring on untrusted Wi‑Fi before your VPN is up. Release is always manual.</p>
+      <label class="chk"><input type="checkbox" id="shStartup"> Engage Safe-Hold automatically at startup</label>
+      <label class="chk"><input type="checkbox" id="shRequireVpn"> Require me to confirm my VPN is connected before I can release</label>
+      <p class="fine">A browser extension can't actually detect a VPN, so this is a manual confirmation — releasing asks you to confirm your VPN is up. The strongest protection is your VPN client's own kill-switch; this is a convenience layer on top of it.</p>
+
+      <h3>Privacy &amp; security</h3>
+      <p><b>No information leaves your device through Hibern8 Ctrl+Space Lite</b> — no servers, analytics, ads, or third-party code, and no data collected or transmitted. Everything is local to your browser profile. A strict Content-Security-Policy blocks any inline or remote script, and an injection watchdog warns you in-panel (and prompts an antivirus scan) if one is ever blocked. Full statement ships as <code>PRIVACY-AND-SECURITY.md</code>. <a href="PRIVACY-AND-SECURITY.md" target="_blank" rel="noopener">Open it →</a></p>
+
+      <h3>License</h3>
+      <p>© 2026 Wildheart Holdings LLC. Free to use — for your personal use, or for an organization across the devices it owns or manages (no per-seat limit). Please don't redistribute, resell, or repackage it. Provided as-is, without warranty. While there is no implied warranty, written or otherwise, if you find an issue you're welcome to report it through the web store listing. Full terms in <code>EULA.md</code>.</p>
+      <button class="btn primary" id="helpCloseBtn">Got it</button>
+    </div>
+  </div>
+  <footer>Barebones build: hibernate tabs/windows, see audio &amp; active tabs, estimate memory/power saved. Verify real RAM in the browser task manager (Shift+Esc / about:performance). © 2026 Wildheart Holdings LLC — personal/entity use, no redistribution, as-is, no warranty. Nothing leaves your device.</footer>
+<script src="lite.js"></script>
+</body>
+</html>
